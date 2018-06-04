@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>滑动插件</title>
+	<link rel="stylesheet" href="css/navMenu.css" />
+	<style>
+		*{margin:0; padding:0;}
+		#openMenuBox{ height:80px; line-height:80px; text-align:center; border-radius:50%; width:100px; cursor: pointer; margin:0 auto; background:#ccc; color:#000; overflow:hidden;}
+		#MenuContent{ width:100%; overflow:hidden; }
+		#MenuContent li{height:50px; line-height:50px;}
+	</style>
+</head>
+<body>
+<!-- demo start-->
+	<!-- 打开按钮 -->
+	<div id="openMenuBox">打开</div>
+	<!-- 内容 自定义 样式自定义 默认要隐藏-->
+	<div class="MenuContent" style="display:none;">
+		<ol>
+			<li>内容1</li>
+			<li>内容2</li>
+			<li>内容3</li>
+			<li>内容4</li>
+		</ol>
+	</div>
+<!-- demo end -->
+</body>
+<script src="js/navMenu.js" ></script>
+<script>
+/**
+ * [getMenuConfig description]
+ * Menus.create(a,b); a->配置参数 b->窗口开启id名
+ * Menus.close();//盒子关闭方法
+ * @param       {array} setting [配置参数]
+ * @return      {array} MenuConfig [参数集]
+ * 基础参数
+ * width        {string} 宽度 和 滑出宽度 默认80%
+ * height       {string} 高度 默认100%
+ * zIndex       {string} 图层高度
+ * position     {string} 滑动方位 默认右方right (left、right类型 高度100%固定,top、bottom类型 宽度100%固定)
+ * bgColor      {string} 背景颜色
+ * 是否开启遮罩层和锁
+ * cover        {Booleans} 是否开启遮罩层 true 开 false 关
+ * lock         {Booleans} 是否锁屏 true 开 false 关
+ * 盒子头部参数
+ * openHeader   {Booleans} 是否开启头部 true 开 false 关
+ * textColor    {string} 字体颜色
+ * headBg       {string} 头部背景 默认白色
+ * headH        {string} 头部高度
+ * headFsize    {string} 头部内容字体大小 默认50%
+ * closeText    {string} 关闭按钮内容
+ * title        {string} 头部标题
+ * sureText     {string} 操作按钮内容
+ * 操作按钮参数
+ * sureId       {string} 添加的id名
+ * sureAddClass {string} 添加的class名
+ * sureClick    {string} 操作按钮绑定点击事件 lg：controll()
+ * 盒子头部没有开启时参数
+ * closeBtnId   {string} 关闭盒子的id对象
+ * 盒子内容部分 (自动将 对象的html嵌入 至 盒子内容部分 )
+ * ContObjType  {string} 内容模板对象类型 id / class 默认 空内容
+ * ContObj      {string} 内容模板对象id/class 名 默认 MenuContent
+ */
+// js demo start
+window.onload = function(){
+	Menus.create({
+		title : '优惠券',
+		cover : true,
+		lock : true,
+		headH : '40px',
+		headBg : '#ccc',
+		sureClick : 'filter()',
+		ContObjType : 'class',
+		ContObj : 'MenuContent',
+    },'openMenuBox');
+}
+function filter(){
+	console.log('冒泡');
+	Menus.close();
+}
+var content = document.getElementsByClassName('MenuContent')[0];
+var lis = content.getElementsByTagName('li');
+for(var i = 0; i < lis.length; i++){
+	lis[i].onclick = function(){
+		Menus.close();
+	}
+}
+// js demo end
+</script>
+<script src="js/MoveBox.js" ></script>
+</html>
